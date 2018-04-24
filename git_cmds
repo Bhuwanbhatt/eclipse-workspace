@@ -1,0 +1,12 @@
+Git Commands for Reference
+
+/** One time command to initialize git repository  **/
+== git init (Initializes git in present directory)
+
+/** Every time when you want to push code to remote repository on master branch  **/
+== git add . (Adds every files on that directory)
+== git commit -am 'Comment' (Adds comment to commit)
+== git push origin master (Pushes code to remote repository on master branch)
+
+/** One time command to add git remote url  **/
+== git remote add origin https://git_remote_url.com/ (Adds remote URL)
