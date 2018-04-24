@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Delete resource &apos;CirclePerimeterArea&apos;" deleteContents="false" description="Delete resource &apos;CirclePerimeterArea&apos;" element1="/CirclePerimeterArea" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1503583324629"/>
+</session>

@@ -1,0 +1,53 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+import java.util.Stack;
+
+public class Praenthesisbhattb1 {
+	public static void main(String[] args) throws FileNotFoundException { 	//defines the main method
+	Scanner input = new Scanner(System.in);
+	System.out.print("Enter name of input file: ");
+	String filename = input.nextLine();										//gets the file that need to be obtained from the computer
+	try {																	// try-catch block if file could not be found
+		File read = new File(filename);										//reads the file
+		Scanner in = new Scanner(read);
+		while(in.hasNext()){													//while loops runs until the file has next line
+			String thisLine = in.nextLine();									// takes the single line as a string and stores it into thisLine
+			System.out.println(isparenthesis(thisLine));						//calls isparenthesis method to check whether the parenthesis match or not.
+		}
+	}
+	catch(FileNotFoundException ex){
+		System.out.println("Could not find the file: " + filename);     //prints could not find the file if file name does not match
+		System.exit(1);
+	}
+	}
+
+	private static boolean isparenthesis(String thisLine) {				//isparenthsis method takes a single line as string thisLine
+		Stack<Character> parenthesis = new Stack<>();					//new stack is created of type character
+		for(int i=0;i<thisLine.length();i++) {							// runs through all the character in the string
+			char C = thisLine.charAt(i);									// takes a character at current position of i
+		//Checks the whether the parenthesis is matching or not
+			if(C =='(') {												
+				parenthesis.push(C);
+			}
+			else if(C==')') {
+				if(parenthesis.isEmpty())
+					return false;
+				else if(parenthesis.peek()=='(')
+					parenthesis.pop();
+				else
+					return false;
+			
+		}
+		}
+			if(parenthesis.isEmpty())
+				return true;
+			else
+				return false;
+		
+		
+		
+	}
+}
+	
+

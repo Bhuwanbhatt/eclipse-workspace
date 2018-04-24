@@ -1,0 +1,151 @@
+
+import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
+
+
+
+public class ModernArt extends Application{
+
+	private Button draw;
+	private TextField objCount;
+	private TextField maxSize;
+	private String[] shapeTypes = {"Rectangle", "Circle"};
+	private ComboBox <String> combo = new ComboBox<>();
+	private BorderPane bdrPane = new BorderPane();
+	private HBox drawingBarPane;	
+	private int siz;
+	private int obj;
+	Pane pane = new Pane();
+	
+	private Pane AddHBox(){
+	
+		drawingBarPane	= new HBox();
+		drawingBarPane.setSpacing(8);
+		drawingBarPane.setPadding(new Insets(4,4,4,4));
+	
+		Label lbl1 = new Label("Object Count");		 
+		Label lbl2 = new Label("Size");
+	
+		objCount = new TextField();
+		maxSize = new TextField();
+		draw = new Button("Draw");	
+	
+		drawingBarPane.getChildren().addAll(combo, lbl1, objCount, lbl2, maxSize, draw);
+		bdrPane.setBottom(drawingBarPane);		
+		
+		draw.setOnAction(e -> drawShape());
+	    		
+		objCount.setOnAction(new EventHandler<ActionEvent>(){
+			@Override public void handle(ActionEvent event){
+        		drawShape();
+       	 }
+        });
+		maxSize.setOnAction(new EventHandler<ActionEvent>(){
+        	@Override public void handle(ActionEvent event){
+        		drawShape();
+       	 }
+        });
+		return drawingBarPane;		
+	
+	}
+	
+    @Override           	
+	public void start(Stage primeryStage) {		
+			
+		
+    	for(int i =0;i < 50;i++) {
+    					     				        			     				      				
+     		Circle cir = new Circle (getCenterX(), getCenterY(), getRadius());
+ 		    cir.setFill(Color.color(Math.random(), Math.random(),Math.random()));
+ 		    pane.getChildren().add(cir); 
+     					        			
+    	}
+    	
+    	ObservableList<String> items = FXCollections.observableArrayList(shapeTypes);
+    	combo.getItems().addAll(items);
+    	combo.setValue("Circle");
+    	
+    	bdrPane.setBottom(AddHBox());
+    	bdrPane.setCenter(pane);
+    	
+		Scene scene = new Scene(bdrPane, 800, 600);		
+    	primeryStage.setTitle("Modern Art");
+    	primeryStage.setScene(scene);
+    	primeryStage.show(); 		
+                  	
+	}
+	 private void drawShape(){
+	  	  
+		
+   	     obj = Integer.parseInt(objCount.getText());
+	     siz = Integer.parseInt(maxSize.getText());
+     			       					
+	     for(int i =0;i < obj;i++) {  				          				
+	    	 
+	    	 double height =	(int) (Math.random()*siz);
+     		 double width = (int) (Math.random()*siz);
+     		 double xcord = (int)(Math.random()*600 +0);
+     		 double ycord = (int)(Math.random()*300 + 0);   		      				
+
+     		//objCount.setOnAction((event) -> drawShape());
+    		//maxSize.setOnAction((event) -> drawShape());
+     		 if (combo.getValue() == "Rectangle"){        				
+     			
+     			 Rectangle rec = new Rectangle(xcord,ycord,width,height);        				
+     			 rec.setFill(Color.color(Math.random(), Math.random(),Math.random())); 
+     			 pane.getChildren().clear();
+     		     bdrPane.getChildren().add(rec);
+     			 }	        			
+     		 pane.getChildren().clear();
+     		
+     		 if (combo.getValue() == "Circle"){
+     				
+     		     Circle cir = new Circle (getCenterX(), getCenterY(), getRadius());
+     		     cir.setFill(Color.color(Math.random(), Math.random(),Math.random()));
+     		     pane.getChildren().clear();
+     		     bdrPane.getChildren().add(cir);       					
+     				        			
+     		} 
+     		pane.getChildren().clear();
+		}
+     } 
+              	
+	 private double getRadius() {
+		
+		return (int) (Math.random()*100 + 10);
+	 }
+
+
+	 private double getCenterY() {
+		
+		return (int)(Math.random()*300 +0);
+	 }
+
+
+	 private double getCenterX() {
+		
+		return (int)(Math.random()*600 +0);
+	 }
+
+
+	 public static void main(String[] args) {    		 
+		 launch(args);
+
+	 }
+}
